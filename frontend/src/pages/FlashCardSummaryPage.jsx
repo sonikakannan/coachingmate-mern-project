@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useGetCourseByIdQuery } from '../redux/api/courseApi';
 import { FaArrowLeftLong } from 'react-icons/fa6';
 import ResultSummary from '../components/practice/flashcard/ResultSummary';
-import FlashCard from '../components/practice/flashcard/FlashCard';
+import FlashCard from '../components/practice/flashcard/Flashcard';
 
 
 const FlashCardSummaryPage = () => {
