@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const BASE_URL = "https://coachingmate-backend.onrender.com/api/auth"
+const BASE_URL = import.meta.env.MODE === "development"?"http://localhost:5001/api/auth":"/api/auth"
 
 export const authApi = createApi({
   reducerPath: 'authApi',
