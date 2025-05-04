@@ -6,7 +6,6 @@ import authRoutes from './routes/auth.route.js'
 import {connectDB} from './config/db.js'
 import generateTopicsRoute from './routes/course.route.js'
 import stripeRoutes from './routes/stripe.route.js'
-import path from 'path'
 
 dotenv.config()
 
@@ -22,19 +21,13 @@ app.use(cors({
 
 
 const PORT= process.env.PORT||5001
-const __dirname = path.resolve()
+
 
 app.use("/api/auth", authRoutes)
 app.use("/api/generate", generateTopicsRoute)
 app.use("/api/stripe", stripeRoutes);
 
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-    app.get("/*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"));
-    });
-}
 
 app.listen(PORT,()=>{
     console.log(`Server is running on PORT ${PORT}`);
