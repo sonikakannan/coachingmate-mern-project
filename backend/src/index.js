@@ -27,6 +27,9 @@ app.use("/api/auth", authRoutes)
 app.use("/api/generate", generateTopicsRoute)
 app.use("/api/stripe", stripeRoutes);
 
+app.get('/', (req, res) => {
+  res.send('API is working!');
+});
 
 
 app.listen(PORT,()=>{
