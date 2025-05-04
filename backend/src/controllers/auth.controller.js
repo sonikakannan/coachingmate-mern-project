@@ -26,8 +26,14 @@ export const signup = async (req, res) => {
       password: hashedPassword,
     });
 
+    // First save the user to get _id
+    await newUser.save();
+
     const token = generateToken(newUser._id);
     newUser.token = token;
+
+    // Save token field update
+    await newUser.save();
 
     res.cookie("jwt", token, {
       maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -36,21 +42,20 @@ export const signup = async (req, res) => {
       secure: process.env.NODE_ENV !== "development"
     });
 
-    await newUser.save();
-
     res.status(201).json({
       _id: newUser._id,
       userName: newUser.userName,
       email: newUser.email,
       password: newUser.password,
       token,
-      creditPoints: newUser.creditPoints, 
+      creditPoints: newUser.creditPoints,
     });
   } catch (error) {
     console.log("Error in signup controller", error.message);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
