@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+::-webkit-scrollbar{
+  display: none;
+}
+
+.card-container {
+  perspective: 1000px;
+}
+
+.card {
+  position: relative;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.card-container:hover .card {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.card-front {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.card-back {
+  background-color: #3b82f6; /* Tailwind blue-500 */
+  color: #ffffff;
+  transform: rotateY(180deg);
+}
