@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const BASE_URL = "https://coachingmate.onrender.com/api/generate"
+const BASE_URL = "https://coachingmate-backend.onrender.com/api/generate"
 
 
 export const courseApi = createApi({
