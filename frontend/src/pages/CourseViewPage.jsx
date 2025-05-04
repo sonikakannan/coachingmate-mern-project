@@ -5,7 +5,6 @@ import { IoBookOutline } from "react-icons/io5";
 import { FaCircleArrowLeft, FaCirclePlay } from "react-icons/fa6";
 import { FaCheckCircle } from "react-icons/fa";
 import { useGetCourseByIdQuery } from "../redux/api/courseApi";
-import { RWebShare } from "react-web-share";
 import { IoIosSend } from "react-icons/io";
 
 const CourseViewPage = () => {
@@ -70,17 +69,7 @@ const CourseViewPage = () => {
       />
      <div className="flex justify-between items-center">
      <h1 className="text-3xl font-bold mb-4">{course.courseTitle}</h1>
-     <RWebShare 
-  data={{
-    title: course.courseTitle,
-    text: `Check out this course: ${course.courseTitle}`,
-    url: window.location.href,
-  }}
->
-  <button className="bg-indigo-500 text-white px-3 py-2 rounded-md cursor-pointer">
-  <IoIosSend className="text-xl"/>
-  </button>
-</RWebShare>
+   
 
      </div>
       <p className="flex items-center gap-2 text-center my-2">
