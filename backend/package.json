@@ -17,7 +17,7 @@
     "@stripe/stripe-js": "^7.2.0",
     "axios": "^1.9.0",
     "bcryptjs": "^3.0.2",
-    "coachingmate-mern-project": "file:../backend",
+    "coachingmate-mern-project": "file:..",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
