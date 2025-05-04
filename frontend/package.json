@@ -14,7 +14,6 @@
     "@stripe/stripe-js": "^7.2.0",
     "@tailwindcss/vite": "^4.1.5",
     "axios": "^1.9.0",
-    "coachingmate-mern-project": "file:..",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
