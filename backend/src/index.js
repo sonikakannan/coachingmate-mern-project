@@ -14,13 +14,13 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin:"https://coachingmate-frontend.onrender.com",
+    origin:"http://localhost:5173",
     credentials: true
 }))
 
 
 
-const PORT= process.env.PORT||'https://coachingmate-backend.onrender.com'
+const PORT= process.env.PORT||5001
 
 
 app.use("/api/auth", authRoutes)
