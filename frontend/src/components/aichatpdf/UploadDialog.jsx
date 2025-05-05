@@ -13,7 +13,7 @@ const UploadDialog = ({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 bg-opacity-50">
       <div className="bg-white w-full max-w-md p-6 rounded-lg shadow-lg relative">
         <h2 className="text-xl font-semibold mb-4">Upload PDF</h2>
 
@@ -53,7 +53,7 @@ const UploadDialog = ({
             disabled={!selectedFile}
             className={`px-4 py-2 rounded text-white transition ${
               selectedFile
-                ? 'bg-blue-600 hover:bg-blue-700'
+                ? 'bg-blue-600 hover:bg-blue-700 cursor-pointer'
                 : 'bg-blue-300 cursor-not-allowed'
             }`}
           >
