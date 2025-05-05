@@ -21,7 +21,7 @@ const QuizPage = () => {
         <FaArrowLeftLong className=" text-indigo-600 text-2xl cursor-pointer " />
       </div></Link>
 
- <div className="grid gap-6 grid-cols-2  text-center lg:grid-cols-3  mx-5 md:mx-auto">
+ <div className="grid gap-6 grid-cols-1 md:grid-cols-2 text-center lg:grid-cols-3  mx-5 md:mx-auto">
         {courses.length > 0 ? (
           courses.map((course, index) => (
 <Link to={`/practice/quiz/quiz-summary/${course._id}`} key={index}>
