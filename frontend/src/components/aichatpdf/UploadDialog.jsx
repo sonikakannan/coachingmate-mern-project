@@ -1,14 +1,4 @@
 import React from 'react';
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-  Box,
-  Typography,
-  Input,
-} from '@mui/material';
 
 const UploadDialog = ({
   open,
@@ -20,44 +10,58 @@ const UploadDialog = ({
   dragActive,
   selectedFile,
 }) => {
+  if (!open) return null;
+
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
-      <DialogTitle>Upload PDF</DialogTitle>
-      <DialogContent>
-        <Box
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="bg-white w-full max-w-md p-6 rounded-lg shadow-lg relative">
+        <h2 className="text-xl font-semibold mb-4">Upload PDF</h2>
+
+        <div
           onDragEnter={onDrag}
           onDragOver={onDrag}
           onDragLeave={onDrag}
           onDrop={onDrop}
-          sx={{
-            border: '2px dashed',
-            borderColor: dragActive ? 'primary.main' : 'grey.400',
-            borderRadius: 2,
-            padding: 4,
-            textAlign: 'center',
-            bgcolor: dragActive ? 'primary.light' : 'transparent',
-            transition: '0.3s',
-          }}
+          className={`border-2 border-dashed rounded-md p-6 text-center transition-colors ${
+            dragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300'
+          }`}
         >
           {selectedFile ? (
-            <Typography variant="body1">{selectedFile.name}</Typography>
+            <p className="text-gray-700">{selectedFile.name}</p>
           ) : (
-            <div className="border bg-gray-100 rounded-md p-2">
-              <input type="file" accept="application/pdf" onChange={onFileChange} />
-              <Typography variant="caption" display="block" mt={1}>
-                Max file size: 10MB
-              </Typography>
+            <div className="bg-gray-100 rounded-md p-4">
+              <input
+                type="file"
+                accept="application/pdf"
+                onChange={onFileChange}
+                className="block w-full text-sm text-gray-700"
+              />
+              <p className="text-xs text-gray-500 mt-2">Max file size: 10MB</p>
             </div>
           )}
-        </Box>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={onUpload} disabled={!selectedFile} variant="contained">
-          Upload
-        </Button>
-      </DialogActions>
-    </Dialog>
+        </div>
+
+        <div className="flex justify-end space-x-2 mt-6">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={onUpload}
+            disabled={!selectedFile}
+            className={`px-4 py-2 rounded text-white transition ${
+              selectedFile
+                ? 'bg-blue-600 hover:bg-blue-700'
+                : 'bg-blue-300 cursor-not-allowed'
+            }`}
+          >
+            Upload
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 
