@@ -19,6 +19,7 @@ import FailPage from "./pages/FailPage";
 import AIChatPdfPage from "./pages/AIChatPdfPage";
 import ExplorePage from "./pages/ExplorePage";
 import MCQSummaryPage from "./pages/MCQSummayPage";
+import AIChatPdfViewPage from "./pages/AIChatPdfViewPage";
 
 // PrivateRoute based on userId
 const PrivateRoute = ({ children }) => {
@@ -69,6 +70,7 @@ const App = () => {
           element={<MCQSummaryPage />}
         />
         <Route path="ai-chatpdf" element={<AIChatPdfPage />} />
+        <Route path="aipdfpage/:pdfId" element={<AIChatPdfViewPage/>}/>
         <Route path="explore" element={<ExplorePage/>} />
       </Route>
     </Routes>

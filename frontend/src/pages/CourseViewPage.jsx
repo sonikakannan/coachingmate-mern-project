@@ -5,7 +5,6 @@ import { IoBookOutline } from "react-icons/io5";
 import { FaCircleArrowLeft, FaCirclePlay } from "react-icons/fa6";
 import { FaCheckCircle } from "react-icons/fa";
 import { useGetCourseByIdQuery } from "../redux/api/courseApi";
-import { IoIosSend } from "react-icons/io";
 
 const CourseViewPage = () => {
   const { courseId } = useParams();

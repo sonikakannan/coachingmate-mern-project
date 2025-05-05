@@ -6,6 +6,7 @@ import authRoutes from './routes/auth.route.js';
 import { connectDB } from './config/db.js';
 import generateTopicsRoute from './routes/course.route.js';
 import stripeRoutes from './routes/stripe.route.js';
+import uploadRoute from './routes/pdfUploade.route.js'
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use(cors({
 app.use("/api/auth", authRoutes);
 app.use("/api/generate", generateTopicsRoute);
 app.use("/api/stripe", stripeRoutes);
+app.use('/api', uploadRoute);
 
 // Health check route
 app.get('/', (req, res) => {
