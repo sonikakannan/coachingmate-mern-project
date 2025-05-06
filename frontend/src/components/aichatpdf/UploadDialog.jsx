@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const UploadDialog = ({
   open,
@@ -23,7 +23,7 @@ const UploadDialog = ({
           onDragLeave={onDrag}
           onDrop={onDrop}
           className={`border-2 border-dashed rounded-md p-6 text-center transition-colors ${
-            dragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300'
+            dragActive ? "border-blue-500 bg-blue-50" : "border-gray-300"
           }`}
         >
           {selectedFile ? (
@@ -53,8 +53,8 @@ const UploadDialog = ({
             disabled={!selectedFile}
             className={`px-4 py-2 rounded text-white transition ${
               selectedFile
-                ? 'bg-blue-600 hover:bg-blue-700 cursor-pointer'
-                : 'bg-blue-300 cursor-not-allowed'
+                ? "bg-blue-600 hover:bg-blue-700 cursor-pointer"
+                : "bg-blue-300 cursor-not-allowed"
             }`}
           >
             Upload

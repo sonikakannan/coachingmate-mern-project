@@ -14,15 +14,18 @@ const DashboardPage = () => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    const storedProgress = JSON.parse(localStorage.getItem("completedChapters")) || {};
+    const storedProgress =
+      JSON.parse(localStorage.getItem("completedChapters")) || {};
     setCompletedChapters(storedProgress);
 
-    const storedBanners = JSON.parse(localStorage.getItem("courseBanners")) || {};
+    const storedBanners =
+      JSON.parse(localStorage.getItem("courseBanners")) || {};
     if (data?.courses) {
       const updatedCourses = data.courses.map((course) => {
         if (!storedBanners[course._id]) {
           const bannerKeys = Object.keys(imageAssets);
-          const randomKey = bannerKeys[Math.floor(Math.random() * bannerKeys.length)];
+          const randomKey =
+            bannerKeys[Math.floor(Math.random() * bannerKeys.length)];
           storedBanners[course._id] = randomKey; // Store the key, not the full path
         }
         return {
@@ -69,7 +72,8 @@ const DashboardPage = () => {
           {courses.map((course, index) => {
             const completedCount = completedChapters[course._id]?.length || 0;
             const totalChapters = course.chapters.length || 0;
-            const progress = totalChapters > 0 ? (completedCount / totalChapters) * 100 : 0;
+            const progress =
+              totalChapters > 0 ? (completedCount / totalChapters) * 100 : 0;
 
             return (
               <div
@@ -83,7 +87,9 @@ const DashboardPage = () => {
                   className="w-full h-40 object-cover rounded-md"
                 />
                 <div className="p-4">
-                  <h2 className="text-xl font-semibold mb-2">{course.courseTitle}</h2>
+                  <h2 className="text-xl font-semibold mb-2">
+                    {course.courseTitle}
+                  </h2>
                   <p className="flex items-center gap-2">
                     <IoBookOutline className="text-lg text-indigo-500" />
                     <span>
@@ -96,7 +102,9 @@ const DashboardPage = () => {
                       style={{ width: `${progress}%` }}
                     ></div>
                   </div>
-                  <p className="text-sm text-gray-500 mt-1">{progress.toFixed(0)}% completed</p>
+                  <p className="text-sm text-gray-500 mt-1">
+                    {progress.toFixed(0)}% completed
+                  </p>
                 </div>
               </div>
             );

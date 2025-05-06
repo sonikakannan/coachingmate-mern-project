@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authApi } from "./api/authApi";
-import authReducer from "./slices/authSlice"; 
-import courseReducer from './slices/courseSlice';
-import { courseApi } from './api/courseApi';
+import authReducer from "./slices/authSlice";
+import courseReducer from "./slices/courseSlice";
+import { courseApi } from "./api/courseApi";
 
 const store = configureStore({
   reducer: {
@@ -12,7 +12,7 @@ const store = configureStore({
     auth: authReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware,courseApi.middleware)
+    getDefaultMiddleware().concat(authApi.middleware, courseApi.middleware),
 });
 
 export default store;

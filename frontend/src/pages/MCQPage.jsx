@@ -23,11 +23,13 @@ const MCQPage = () => {
 
   const courses = Array.isArray(data?.courses) ? data.courses : [];
   // Filter courses that contain MCQs (in 'qa' field)
-  const userCoursesWithMCQs = courses.filter(course => course.qa && course.qa.length > 0);
+  const userCoursesWithMCQs = courses.filter(
+    (course) => course.qa && course.qa.length > 0
+  );
 
   return (
     <div className="min-h-screen bg-indigo-50 px-4 py-6 mx-4">
-      <Link to={'/practice'}>
+      <Link to={"/practice"}>
         <div className="p-3">
           <FaArrowLeftLong className="text-indigo-600 text-2xl cursor-pointer" />
         </div>

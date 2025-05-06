@@ -1,9 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const courseSlice = createSlice({
-  name: 'course',
+  name: "course",
   initialState: {
-    selectedLevel: '',
+    selectedLevel: "",
     selectedTopics: [],
     courseData: null,
     topics: [],
@@ -15,7 +15,7 @@ const courseSlice = createSlice({
     toggleTopic: (state, action) => {
       const topic = action.payload;
       if (state.selectedTopics.includes(topic)) {
-        state.selectedTopics = state.selectedTopics.filter(t => t !== topic);
+        state.selectedTopics = state.selectedTopics.filter((t) => t !== topic);
       } else {
         state.selectedTopics.push(topic);
       }
@@ -29,16 +29,11 @@ const courseSlice = createSlice({
     },
     setTopics: (state, action) => {
       state.topics = action.payload;
-    }
-  }
+    },
+  },
 });
 
-export const {
-  setLevel,
-  toggleTopic,
-  setCourseData,
-  resetCourse,
-  setTopics
-} = courseSlice.actions;
+export const { setLevel, toggleTopic, setCourseData, resetCourse, setTopics } =
+  courseSlice.actions;
 
 export default courseSlice.reducer;

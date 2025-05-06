@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import ChatSection from '../components/aichatpdf/ChatSession';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import ChatSection from "../components/aichatpdf/ChatSession";
+import axios from "axios";
 
 const AIChatPdfViewPage = () => {
   const { pdfId } = useParams();
-  const [pdfUrl, setPdfUrl] = useState('');
+  const [pdfUrl, setPdfUrl] = useState("");
 
   useEffect(() => {
     const fetchPdf = async () => {
       try {
-        const response = await axios.get(`http://localhost:5001/api/pdf/${pdfId}`);
+        const response = await axios.get(
+          `http://localhost:5001/api/pdf/${pdfId}`
+        );
         setPdfUrl(response.data.url);
       } catch (err) {
-        console.error('Failed to load PDF:', err);
+        console.error("Failed to load PDF:", err);
       }
     };
 

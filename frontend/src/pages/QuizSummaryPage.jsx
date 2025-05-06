@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { useGetCourseByIdQuery } from '../redux/api/courseApi';
-import QuestionCard from '../components/practice/quiz/QuestionCard';
-import ResultSummary from '../components/practice/quiz/ResultSummary';
-
+import React, { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useGetCourseByIdQuery } from "../redux/api/courseApi";
+import QuestionCard from "../components/practice/quiz/QuestionCard";
+import ResultSummary from "../components/practice/quiz/ResultSummary";
 
 const QuizSummaryPage = () => {
   const { quizid } = useParams();
@@ -13,8 +12,18 @@ const QuizSummaryPage = () => {
   const [showResult, setShowResult] = useState(false);
   const [clicked, setClicked] = useState(false);
 
-  if (isLoading) return <div className="text-center mt-10 text-lg font-medium">Loading quiz...</div>;
-  if (isError || !data) return <div className="text-center mt-10 text-red-600 text-lg font-medium">Failed to load quiz.</div>;
+  if (isLoading)
+    return (
+      <div className="text-center mt-10 text-lg font-medium">
+        Loading quiz...
+      </div>
+    );
+  if (isError || !data)
+    return (
+      <div className="text-center mt-10 text-red-600 text-lg font-medium">
+        Failed to load quiz.
+      </div>
+    );
 
   const quiz = data.quiz || [];
   const currentQuiz = quiz[currentIndex];
@@ -45,11 +54,9 @@ const QuizSummaryPage = () => {
       />
     );
   }
-  
 
   return (
     <div className="min-h-screen bg-indigo-100 p-6 max-h-screen overflow-y-scroll">
-     
       <QuestionCard
         currentIndex={currentIndex}
         totalQuestions={quiz.length}

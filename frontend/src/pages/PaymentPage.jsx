@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateCredits } from "../redux/slices/authSlice";
 import { useNavigate } from "react-router-dom"; // For navigation
 
-const BASE_URL = import.meta.env.MODE === "development"?"http://localhost:5001/api":"/api"
-
+const BASE_URL =
+  import.meta.env.MODE === "development" ? "http://localhost:5001/api" : "/api";
 
 const plans = [
   {

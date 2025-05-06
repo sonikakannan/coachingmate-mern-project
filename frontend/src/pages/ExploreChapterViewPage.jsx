@@ -3,7 +3,7 @@ import { FaCircleArrowLeft } from "react-icons/fa6";
 import { FaRegCopy } from "react-icons/fa";
 import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 
-const ViewChapterPage = () => {
+const ExploreViewChapterPage = () => {
   const { courseId, chapterId, contentId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,7 +24,7 @@ const ViewChapterPage = () => {
     if (newIndex >= 0 && newIndex < chapter.content.length) {
       setCurrentContentIndex(newIndex);
       navigate(
-        `/course-view/${courseId}/view-chapter/${chapter._id}/${chapter.content[newIndex]._id}`,
+        `/explore/course-view/${course._id}/view-chapter/${chapter._id}/${chapter.content[newIndex]._id}`,
         { state: { chapter, course } }
       );
     }
@@ -44,7 +44,7 @@ const ViewChapterPage = () => {
         JSON.stringify(completedChapters)
       );
     }
-    navigate(`/course-view/${courseId}`);
+    navigate(`/explore/course-view/${course._id}`);
   };
 
   const handleCopy = async (text) => {
@@ -151,4 +151,4 @@ const ViewChapterPage = () => {
   );
 };
 
-export default ViewChapterPage;
+export default ExploreViewChapterPage;

@@ -11,11 +11,31 @@ import { toast } from "react-toastify";
 import { MdClose } from "react-icons/md";
 
 const navItems = [
-  { to: "/", label: "Home", icon: <IoGrid style={{ width: "20px", height: "20px" }} /> },
-  { to: "/create-course", label: "Create Course", icon: <IoAddCircle style={{ width: "20px", height: "20px" }} /> },
-  { to: "/practice", label: "Practice", icon: <FaCalendarAlt style={{ width: "20px", height: "20px" }} /> },
-  { to: "/ai-chatpdf", label: "AI ChatPdf", icon: <FaRobot style={{ width: "20px", height: "20px" }} /> },
-  { to: "/explore", label: "Explore", icon: <MdHistory style={{ width: "20px", height: "20px" }} /> },
+  {
+    to: "/",
+    label: "Home",
+    icon: <IoGrid style={{ width: "20px", height: "20px" }} />,
+  },
+  {
+    to: "/create-course",
+    label: "Create Course",
+    icon: <IoAddCircle style={{ width: "20px", height: "20px" }} />,
+  },
+  {
+    to: "/practice",
+    label: "Practice",
+    icon: <FaCalendarAlt style={{ width: "20px", height: "20px" }} />,
+  },
+  {
+    to: "/ai-chatpdf",
+    label: "AI ChatPdf",
+    icon: <FaRobot style={{ width: "20px", height: "20px" }} />,
+  },
+  {
+    to: "/explore",
+    label: "Explore",
+    icon: <MdHistory style={{ width: "20px", height: "20px" }} />,
+  },
 ];
 
 const SidebarLink = ({ to, label, icon }) => (
@@ -51,9 +71,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   };
 
   return (
-    <div className={`fixed md:relative z-50 h-screen bg-indigo-600 w-56 text-white flex-col justify-between py-5 transition-transform duration-300 ease-in-out 
-      ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 flex`}>
-
+    <div
+      className={`fixed md:relative z-50 h-screen bg-indigo-600 w-56 text-white flex-col justify-between py-5 transition-transform duration-300 ease-in-out 
+      ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 flex`}
+    >
       {/* Close Icon for Mobile */}
       <div className="flex px-4 py-2 md:hidden">
         <button onClick={toggleSidebar}>
@@ -80,9 +101,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           className="hover:bg-indigo-500 w-full flex items-center gap-2 p-2 rounded"
         >
           <MdLogout className="w-6 h-6 md:w-5 md:h-5" />
-          <p className="flex font-semibold text-lg cursor-pointer">
-            Logout
-          </p>
+          <p className="flex font-semibold text-lg cursor-pointer">Logout</p>
         </button>
       </div>
     </div>

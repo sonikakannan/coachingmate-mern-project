@@ -8,16 +8,30 @@ const MCQSummaryPage = () => {
   const { data, isLoading, isError } = useGetCourseByIdQuery(qaid);
   const [showAnswer, setShowAnswer] = useState(null);
 
-  if (isLoading) return <div className="text-center mt-10 text-lg text-gray-600">Loading...</div>;
-  if (isError) return <div className="text-center mt-10 text-red-500 text-lg">Error loading data.</div>;
+  if (isLoading)
+    return (
+      <div className="text-center mt-10 text-lg text-gray-600">Loading...</div>
+    );
+  if (isError)
+    return (
+      <div className="text-center mt-10 text-red-500 text-lg">
+        Error loading data.
+      </div>
+    );
 
   return (
     <div className="max-w-3xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-         <Link to={'/practice/mcq'}><div className="p-3">
-                        <FaArrowLeftLong className=" text-indigo-600 text-2xl cursor-pointer " />
-                      </div></Link>
-      <h1 className="text-3xl font-extrabold text-indigo-700  text-center">MCQ Summary</h1>
-      <p className="text-center text-gray-500 mb-10">Click on a question to view the answer</p>
+      <Link to={"/practice/mcq"}>
+        <div className="p-3">
+          <FaArrowLeftLong className=" text-indigo-600 text-2xl cursor-pointer " />
+        </div>
+      </Link>
+      <h1 className="text-3xl font-extrabold text-indigo-700  text-center">
+        MCQ Summary
+      </h1>
+      <p className="text-center text-gray-500 mb-10">
+        Click on a question to view the answer
+      </p>
 
       {data.qa.map((item, index) => (
         <div

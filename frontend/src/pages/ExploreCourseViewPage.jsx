@@ -6,7 +6,7 @@ import { FaCircleArrowLeft, FaCirclePlay } from "react-icons/fa6";
 import { FaCheckCircle } from "react-icons/fa";
 import { useGetCourseByIdQuery } from "../redux/api/courseApi";
 
-const CourseViewPage = () => {
+const ExploreCourseViewPage = () => {
   const { courseId } = useParams();
   const navigate = useNavigate();
   const [completedChapters, setCompletedChapters] = useState([]);
@@ -26,9 +26,9 @@ const CourseViewPage = () => {
     if (course?._id) {
       const storedBanners =
         JSON.parse(localStorage.getItem("courseBanners")) || {};
-      const bannerKey = storedBanners[course._id]; // Fetch the key from localStorage
+      const bannerKey = storedBanners[course._id];
       if (bannerKey && imageAssets[bannerKey]) {
-        setBannerImage(bannerKey); // Ensure that the key exists in imageAssets
+        setBannerImage(bannerKey);
       }
     }
   }, [course]);
@@ -57,28 +57,34 @@ const CourseViewPage = () => {
 
   return (
     <div className="px-8 py-4 bg-gray-50/50 min-h-screen max-h-screen max-w-6xl mx-auto overflow-y-scroll mb-10">
-      <Link to={"/"}>
+      <Link to="/explore">
         <FaCircleArrowLeft className="text-indigo-500 text-2xl cursor-pointer my-4" />
       </Link>
+
       <img
         src={imageAssets[bannerImage]}
         alt="banner"
         className="w-full h-60 object-cover rounded mb-6"
       />
+
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold mb-4">{course.courseTitle}</h1>
       </div>
+
       <p className="flex items-center gap-2 text-center my-2">
         <IoBookOutline className="text-lg" />
         <span className="text-indigo-500">
           {course.chapters.length} chapters
         </span>
       </p>
+
       <h1 className="text-xl font-bold">Description</h1>
       <p className="text-gray-600">{course.description}</p>
+
       <button className="mt-6 px-6 py-4 font-semibold bg-indigo-600 text-white rounded-md hover:bg-indigo-700 cursor-pointer transition w-full">
         Start Now
       </button>
+
       <div className="mt-8">
         <h1 className="text-xl font-bold mb-2">Chapters</h1>
         {course.chapters.map((chapter) => {
@@ -90,7 +96,7 @@ const CourseViewPage = () => {
               key={chapter._id}
               to={
                 firstContent
-                  ? `/course-view/${course._id}/view-chapter/${chapter._id}/${firstContent._id}`
+                  ? `/explore/course-view/${course._id}/view-chapter/${chapter._id}/${firstContent._id}`
                   : "#"
               }
               state={{ chapter, course }}
@@ -111,4 +117,4 @@ const CourseViewPage = () => {
   );
 };
 
-export default CourseViewPage;
+export default ExploreCourseViewPage;

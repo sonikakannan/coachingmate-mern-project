@@ -25,21 +25,24 @@ const SignupPage = () => {
     try {
       const response = await signup(formData).unwrap();
       dispatch(setCredentials(response));
-      localStorage.setItem("userId", response._id); 
-      localStorage.setItem("token", response.token); 
+      localStorage.setItem("userId", response._id);
+      localStorage.setItem("token", response.token);
       toast.success("Signup successfully!");
       navigate("/");
     } catch (err) {
       console.error("Signup failed:", err);
-      toast.error(err?.data?.message || "Something went wrong. Please try again.");
+      toast.error(
+        err?.data?.message || "Something went wrong. Please try again."
+      );
     }
   };
-  
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-indigo-600 via-indigo-700 to-indigo-800">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-        <h1 className="text-2xl font-semibold text-center mb-6">Create Account</h1>
+      <div className="bg-white p-8 rounded-lg shadow-lg w-80 md:w-96">
+        <h1 className="text-2xl font-semibold text-center mb-6">
+          Create Account
+        </h1>
         <form className="space-y-3" onSubmit={handleSubmit}>
           <div className="flex items-center bg-[#ecf2ec] p-3 rounded-md">
             <FaRegUser className="text-indigo-600 text-xl mr-2" />
