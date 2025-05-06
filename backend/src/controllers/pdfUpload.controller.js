@@ -34,30 +34,30 @@ export const upload = multer({ storage });
 // Upload + parse PDF
 export const uploadPdf = async (req, res) => {
   try {
+    const userId = req.body.userId; // or from req.user if using auth middleware
+    if (!userId) {
+      return res.status(400).json({ success: false, message: 'Missing userId' });
+    }
+
     if (!req.file) {
       return res.status(400).json({ success: false, message: 'No file uploaded' });
     }
 
     const pdfUrl = req.file.path;
-
-    // Download and parse
     const response = await axios.get(pdfUrl, { responseType: 'arraybuffer' });
     const dataBuffer = Buffer.from(response.data, 'binary');
     const data = await pdfParse(dataBuffer);
     const fullText = data.text;
 
-    // Split into chunks
     const chunkSize = 1000;
     const chunks = [];
     for (let i = 0; i < fullText.length; i += chunkSize) {
       chunks.push(fullText.slice(i, i + chunkSize));
     }
 
-    // Save PDF
-    const pdf = new Pdf({ url: pdfUrl });
+    const pdf = new Pdf({ url: pdfUrl, userId }); // include userId
     const savedPdf = await pdf.save();
 
-    // Save chunks
     const chunkDocs = chunks.map((chunk) => ({
       pdfId: savedPdf._id,
       text: chunk,
@@ -75,13 +75,18 @@ export const uploadPdf = async (req, res) => {
   }
 };
 
-// List all PDFs
+
 export const getPdfList = async (req, res) => {
   try {
-    const pdfs = await Pdf.find().select('_id url createdAt');
+    const { userId } = req.query;
+    if (!userId) {
+      return res.status(400).json({ success: false, message: 'Missing userId' });
+    }
+
+    const pdfs = await Pdf.find({ userId }).select('_id url uploadedAt');
     const list = pdfs.map((pdf) => ({
       id: pdf._id,
-      name: `PDF - ${pdf._id.toString().slice(-5)}`, // Or store real name if needed
+      name: `PDF - ${pdf._id.toString().slice(-5)}`,
     }));
     res.status(200).json(list);
   } catch (error) {
@@ -89,6 +94,7 @@ export const getPdfList = async (req, res) => {
     res.status(500).json({ success: false, message: 'Failed to fetch PDF list' });
   }
 };
+
 
 // Get single PDF URL
 export const getPdfById = async (req, res) => {

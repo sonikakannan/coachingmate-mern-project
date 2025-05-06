@@ -12,14 +12,17 @@ const AIChatPdfPage = () => {
 
   const navigate = useNavigate();
 
+  const userId = localStorage.getItem('userId'); // or get it from your auth context
+
   const fetchPdfList = async () => {
     try {
-      const response = await axios.get('http://localhost:5001/api/pdf-list');
+      const response = await axios.get(`http://localhost:5001/api/pdf-list?userId=${userId}`);
       setPdfList(response.data);
     } catch (err) {
       console.error('Failed to fetch PDFs:', err);
     }
   };
+  
 
   useEffect(() => {
     fetchPdfList();
@@ -44,23 +47,24 @@ const AIChatPdfPage = () => {
 
   const handleUpload = async () => {
     if (!selectedFile) return;
-
+  
     setUploading(true);
     const formData = new FormData();
     formData.append('file', selectedFile);
-
+    formData.append('userId', userId);
+  
     try {
       const res = await axios.post('http://localhost:5001/api/upload', formData);
       setOpen(false);
       setSelectedFile(null);
-      fetchPdfList(); // Refresh list
+      fetchPdfList();
     } catch (err) {
       console.error('Upload failed:', err);
     } finally {
       setUploading(false);
     }
   };
-
+  
   return (
     <div className="p-4">
       <div className="flex justify-end mb-4">
