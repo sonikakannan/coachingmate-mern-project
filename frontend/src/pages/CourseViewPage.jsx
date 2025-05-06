@@ -24,13 +24,10 @@ const CourseViewPage = () => {
   useEffect(() => {
     if (course?._id) {
       const storedBanners = JSON.parse(localStorage.getItem("courseBanners")) || {};
-      if (!storedBanners[course._id]) {
-        const bannerKeys = Object.keys(imageAssets);
-        const randomKey = bannerKeys[Math.floor(Math.random() * bannerKeys.length)];
-        storedBanners[course._id] = randomKey;
-        localStorage.setItem("courseBanners", JSON.stringify(storedBanners));
+      const bannerKey = storedBanners[course._id]; // Fetch the key from localStorage
+      if (bannerKey && imageAssets[bannerKey]) {
+        setBannerImage(bannerKey); // Ensure that the key exists in imageAssets
       }
-      setBannerImage(storedBanners[course._id]);
     }
   }, [course]);
 
@@ -66,11 +63,9 @@ const CourseViewPage = () => {
         alt="banner"
         className="w-full h-60 object-cover rounded mb-6"
       />
-     <div className="flex justify-between items-center">
-     <h1 className="text-3xl font-bold mb-4">{course.courseTitle}</h1>
-   
-
-     </div>
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold mb-4">{course.courseTitle}</h1>
+      </div>
       <p className="flex items-center gap-2 text-center my-2">
         <IoBookOutline className="text-lg" />
         <span className="text-indigo-500">{course.chapters.length} chapters</span>

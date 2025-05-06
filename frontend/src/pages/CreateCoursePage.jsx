@@ -59,12 +59,10 @@ const CreateCoursePage = () => {
     }
 
     try {
-      const res = await generateCourse({ topics: selectedTopics }).unwrap();
+      const res = await generateCourse({ topics: selectedTopics,  userId: user._id }).unwrap();
       dispatch(setCourseData(res));
       dispatch(updateCredits(user.creditPoints - 1));
       toast.success("Course generated successfully");
-
-      // ✅ Reset input fields
       setHeading("");
       dispatch(resetCourse());
 

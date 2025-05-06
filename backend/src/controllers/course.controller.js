@@ -50,7 +50,7 @@ export const generateTopics = async (req, res) => {
 };
 
 export const generateCourse = async (req, res) => {
-  const { topics} = req.body;
+  const { topics, userId } = req.body;
 
   try {
     
@@ -133,7 +133,13 @@ export const generateCourse = async (req, res) => {
     const jsonText = rawText.match(/```json\n([\s\S]+?)\n```/);
     const parsed = jsonText ? JSON.parse(jsonText[1]) : JSON.parse(rawText);
 
-    const newCourse = new Course(parsed.courses[0]);
+    const newCourse = new Course({
+      ...parsed.courses[0],
+      user: userId,
+      topics,
+      createdAt: new Date(),
+    });
+    
     await newCourse.save();
 
     res.status(201).json({ message: "Course saved", course: newCourse });
@@ -162,5 +168,16 @@ export const getCourseById = async (req, res) => {
   } catch (error) {
     console.error("Error fetching course:", error.message);
     res.status(500).json({ error: "Failed to fetch course" });
+  }
+};
+
+export const getUserCourses = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const courses = await Course.find({ user: userId }); // filter by user
+    res.status(200).json({ courses });
+  } catch (error) {
+    console.error("Error fetching user courses:", error.message);
+    res.status(500).json({ error: "Failed to retrieve user courses" });
   }
 };

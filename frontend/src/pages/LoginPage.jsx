@@ -23,6 +23,7 @@ const LoginPage = () => {
       const response = await login({ email, password }).unwrap();
       dispatch(setCredentials(response));
       localStorage.setItem("userId", response._id); 
+      localStorage.setItem("token", response.token); // Save the token
       toast.success("Login successfully!");
       navigate("/");
     } catch (err) {

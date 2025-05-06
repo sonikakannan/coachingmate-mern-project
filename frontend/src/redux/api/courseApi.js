@@ -15,10 +15,10 @@ export const courseApi = createApi({
       })
     }),
     generateCourse: builder.mutation({
-      query: ({ topics }) => ({
+      query: ({ topics, userId }) => ({
         url: '/course',
         method: 'POST',
-        body: { topics }
+        body: { topics, userId }
       })
     }),
     getAllCourses: builder.query({
@@ -26,13 +26,18 @@ export const courseApi = createApi({
     }),
     getCourseById: builder.query({
       query: (id) => `/courses/${id}`
-    })
-  })
+    }),
+    getUserCourses: builder.query({
+      query: (userId) => `/user-courses/${userId}`,
+    }),
+  }),  
 });
 
 export const {
   useGenerateTopicsMutation,
   useGenerateCourseMutation,
   useGetAllCoursesQuery,
-  useGetCourseByIdQuery
+  useGetCourseByIdQuery,
+  useGetUserCoursesQuery,
 } = courseApi;
+

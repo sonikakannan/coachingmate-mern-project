@@ -30,6 +30,8 @@ const qaSchema = new mongoose.Schema({
 });
 
 const courseSchema = new mongoose.Schema({
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  topics: [String],
   courseTitle: String,
   description: String,
   banner_image: String,
@@ -38,11 +40,9 @@ const courseSchema = new mongoose.Schema({
   quiz: [quizSchema],
   flashcards: [flashcardSchema],
   qa: [qaSchema],
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
+  createdAt: { type: Date, default: Date.now },
 });
+
 
 const Course = mongoose.model('Course', courseSchema);
 

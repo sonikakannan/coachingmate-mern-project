@@ -26,6 +26,7 @@ const SignupPage = () => {
       const response = await signup(formData).unwrap();
       dispatch(setCredentials(response));
       localStorage.setItem("userId", response._id); 
+      localStorage.setItem("token", response.token); 
       toast.success("Signup successfully!");
       navigate("/");
     } catch (err) {

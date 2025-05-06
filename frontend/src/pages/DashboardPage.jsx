@@ -3,11 +3,13 @@ import { useNavigate, Link } from "react-router-dom";
 import book from "../assets/images/book.png";
 import { imageAssets } from "../data/Options";
 import { IoBookOutline } from "react-icons/io5";
-import { useGetAllCoursesQuery } from "../redux/api/courseApi";
+import { useGetUserCoursesQuery } from "../redux/api/courseApi";
 
 const DashboardPage = () => {
   const navigate = useNavigate();
-  const { data, isLoading, isError } = useGetAllCoursesQuery();
+  const userId = localStorage.getItem("userId");
+
+  const { data, isLoading, isError } = useGetUserCoursesQuery(userId);
   const [completedChapters, setCompletedChapters] = useState({});
   const [courses, setCourses] = useState([]);
 
@@ -21,15 +23,16 @@ const DashboardPage = () => {
         if (!storedBanners[course._id]) {
           const bannerKeys = Object.keys(imageAssets);
           const randomKey = bannerKeys[Math.floor(Math.random() * bannerKeys.length)];
-          storedBanners[course._id] = randomKey;
+          storedBanners[course._id] = randomKey; // Store the key, not the full path
         }
         return {
           ...course,
-          banner_image: storedBanners[course._id],
+          banner: storedBanners[course._id], // Use the key
         };
       });
-      localStorage.setItem("courseBanners", JSON.stringify(storedBanners));
+
       setCourses(updatedCourses);
+      localStorage.setItem("courseBanners", JSON.stringify(storedBanners));
     }
   }, [data]);
 
@@ -75,7 +78,7 @@ const DashboardPage = () => {
                 className="bg-white rounded-lg shadow-md border border-gray-300 overflow-hidden p-5 cursor-pointer hover:shadow-lg transition"
               >
                 <img
-                  src={imageAssets[course.banner_image]}
+                  src={imageAssets[course.banner]} // Use the banner key to access imageAssets
                   alt="Course Banner"
                   className="w-full h-40 object-cover rounded-md"
                 />
