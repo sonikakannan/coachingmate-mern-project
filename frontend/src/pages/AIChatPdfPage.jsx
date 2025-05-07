@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"; 
 import UploadDialog from "../components/aichatpdf/UploadDialog";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,7 +7,6 @@ import pdfIcon from "../assets/images/pdf.png";
 const AIChatPdfPage = () => {
   const [open, setOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [dragActive, setDragActive] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [pdfList, setPdfList] = useState([]);
 
@@ -30,21 +29,6 @@ const AIChatPdfPage = () => {
   }, []);
 
   const handleFileChange = (e) => setSelectedFile(e.target.files[0]);
-
-  const handleDrag = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(e.type === "dragenter" || e.type === "dragover");
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      setSelectedFile(e.dataTransfer.files[0]);
-    }
-  };
 
   const handleUpload = async () => {
     if (!selectedFile) return;
@@ -108,15 +92,33 @@ const AIChatPdfPage = () => {
           setSelectedFile(null);
         }}
         onFileChange={handleFileChange}
-        onDrag={handleDrag}
-        onDrop={handleDrop}
         onUpload={handleUpload}
-        dragActive={dragActive}
         selectedFile={selectedFile}
+        uploading={uploading}
       />
 
       {uploading && (
-        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-white px-4 py-2 rounded shadow text-indigo-600">
+        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-white px-4 py-2 rounded shadow flex items-center gap-2 text-indigo-600">
+          <svg
+            className="animate-spin h-5 w-5 text-indigo-600"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+            ></path>
+          </svg>
           Uploading...
         </div>
       )}
