@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"; 
 import UploadDialog from "../components/aichatpdf/UploadDialog";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -12,7 +12,6 @@ const BASE_URL =
 const AIChatPdfPage = () => {
   const [open, setOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [dragActive, setDragActive] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [pdfList, setPdfList] = useState([]);
 
@@ -35,21 +34,6 @@ const AIChatPdfPage = () => {
   }, []);
 
   const handleFileChange = (e) => setSelectedFile(e.target.files[0]);
-
-  const handleDrag = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(e.type === "dragenter" || e.type === "dragover");
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      setSelectedFile(e.dataTransfer.files[0]);
-    }
-  };
 
   const handleUpload = async () => {
     if (!selectedFile) return;
@@ -113,12 +97,9 @@ const AIChatPdfPage = () => {
           setSelectedFile(null);
         }}
         onFileChange={handleFileChange}
-        onDrag={handleDrag}
-        onDrop={handleDrop}
         onUpload={handleUpload}
-        dragActive={dragActive}
         selectedFile={selectedFile}
-        uploading={uploading} // pass state
+        uploading={uploading}
       />
 
       {uploading && (

@@ -3,7 +3,7 @@ import React from "react";
 const UploadDialog = ({
   open,
   onClose,
-  onFileChange, // Use the prop passed from the parent
+  onFileChange,
   onUpload,
   selectedFile,
   uploading,
@@ -12,7 +12,7 @@ const UploadDialog = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 bg-opacity-50">
-      <div className="bg-white w-full max-w-72 md:max-w-md p-6 rounded-lg shadow-lg relative">
+      <div className="bg-white w-full max-w-md p-6 rounded-lg shadow-lg relative">
         <h2 className="text-xl font-semibold mb-4">Upload PDF</h2>
 
         <div className="text-center">
@@ -22,8 +22,7 @@ const UploadDialog = ({
             <div className="bg-gray-100 rounded-md p-4">
               <label
                 htmlFor="file-upload"
-                className="block w-full py-3 px-5 bg-blue-600 text-white rounded cursor-pointer text-center"
-                onClick={() => document.getElementById("file-upload").click()}
+                className="block w-full py-2 px-4 bg-blue-600 text-white rounded cursor-pointer"
               >
                 Choose PDF
               </label>
@@ -31,7 +30,7 @@ const UploadDialog = ({
                 id="file-upload"
                 type="file"
                 accept=".pdf"
-                onChange={onFileChange} // Use the correct prop here
+                onChange={onFileChange}
                 className="hidden"
               />
               <p className="text-xs text-gray-500 mt-2">Max file size: 10MB</p>
