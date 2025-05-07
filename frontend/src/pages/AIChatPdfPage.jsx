@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react"; 
+import React, { useState, useEffect } from "react";
 import UploadDialog from "../components/aichatpdf/UploadDialog";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import pdfIcon from "../assets/images/pdf.png";
 
-const BASE_URL=  import.meta.env.MODE === "development"
-? "http://localhost:5001"
-: "https://coachingmate-backend.onrender.com";
+const BASE_URL = import.meta.env.MODE === "development"
+  ? "http://localhost:5001"
+  : "https://coachingmate-backend.onrender.com";
 
 const AIChatPdfPage = () => {
   const [open, setOpen] = useState(false);
