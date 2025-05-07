@@ -20,12 +20,13 @@ const UploadDialog = ({
             <p className="text-gray-700 mb-4">{selectedFile.name}</p>
           ) : (
             <div className="bg-gray-100 rounded-md p-4">
-              <label
-                htmlFor="file-upload"
-                className="block w-full py-2 px-4 bg-blue-600 text-white rounded cursor-pointer"
-              >
-                Choose PDF
-              </label>
+             <label
+  htmlFor="file-upload"
+  className="block w-full py-3 px-5 bg-blue-600 text-white rounded cursor-pointer text-center"
+  onClick={() => document.getElementById("file-upload").click()}
+>
+  Choose PDF
+</label>
               <input
                 id="file-upload"
                 type="file"
