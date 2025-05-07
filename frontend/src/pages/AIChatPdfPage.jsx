@@ -6,8 +6,8 @@ import pdfIcon from "../assets/images/pdf.png";
 
 const BASE_URL =
   import.meta.env.MODE === "development"
-    ? "http://localhost:5001/api"
-    : "https://coachingmate-backend.onrender.com/api";
+    ? "http://localhost:5001"
+    : "https://coachingmate-backend.onrender.com";
 
 const AIChatPdfPage = () => {
   const [open, setOpen] = useState(false);
@@ -22,7 +22,7 @@ const AIChatPdfPage = () => {
   const fetchPdfList = async () => {
     try {
       const response = await axios.get(
-        `${BASE_URL}/pdf-list?userId=${userId}`
+        `${BASE_URL}/api/pdf-list?userId=${userId}`
       );
       setPdfList(response.data);
     } catch (err) {
@@ -60,7 +60,7 @@ const AIChatPdfPage = () => {
     formData.append("userId", userId);
 
     try {
-      await axios.post(`${BASE_URL}/upload`, formData);
+      await axios.post(`${BASE_URL}/api/upload`, formData);
       setOpen(false);
       setSelectedFile(null);
       fetchPdfList();
