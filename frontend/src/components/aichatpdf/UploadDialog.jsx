@@ -3,7 +3,7 @@ import React from "react";
 const UploadDialog = ({
   open,
   onClose,
-  onFileChange,
+  onFileChange, // Use the prop passed from the parent
   onUpload,
   selectedFile,
   uploading,
@@ -16,28 +16,28 @@ const UploadDialog = ({
         <h2 className="text-xl font-semibold mb-4">Upload PDF</h2>
 
         <div className="text-center">
-  {selectedFile ? (
-    <p className="text-gray-700 mb-4">{selectedFile.name}</p>
-  ) : (
-    <div className="bg-gray-100 rounded-md p-4">
-      <label
-        htmlFor="file-upload"
-        className="block w-full py-3 px-5 bg-blue-600 text-white rounded cursor-pointer text-center"
-        onClick={() => document.getElementById("file-upload").click()}
-      >
-        Choose PDF
-      </label>
-      <input
-        id="file-upload"
-        type="file"
-        accept=".pdf"
-        onChange={handleFileChange}
-        className="hidden"
-      />
-      <p className="text-xs text-gray-500 mt-2">Max file size: 10MB</p>
-    </div>
-  )}
-</div>
+          {selectedFile ? (
+            <p className="text-gray-700 mb-4">{selectedFile.name}</p>
+          ) : (
+            <div className="bg-gray-100 rounded-md p-4">
+              <label
+                htmlFor="file-upload"
+                className="block w-full py-3 px-5 bg-blue-600 text-white rounded cursor-pointer text-center"
+                onClick={() => document.getElementById("file-upload").click()}
+              >
+                Choose PDF
+              </label>
+              <input
+                id="file-upload"
+                type="file"
+                accept=".pdf"
+                onChange={onFileChange} // Use the correct prop here
+                className="hidden"
+              />
+              <p className="text-xs text-gray-500 mt-2">Max file size: 10MB</p>
+            </div>
+          )}
+        </div>
 
         <div className="flex justify-end space-x-2 mt-6">
           <button
